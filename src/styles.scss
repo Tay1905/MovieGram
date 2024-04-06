@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    font-family: "Anek Tamil", sans-serif;
+    // font-family: "Notable", sans-serif;
+    margin: 0;
+}
+/* Breite und Höhe der Scrollleiste anpassen */
+::-webkit-scrollbar {
+    width: 10px; /* Breite der Scrollleiste */
+    height: 10px; /* Höhe der Scrollleiste */
+  }
+  
+  /* Track (Hintergrund) der Scrollleiste */
+  ::-webkit-scrollbar-track {
+    background: #000000;
+
+  }
+  
+  /* Griff (Daumen) der Scrollleiste */
+  ::-webkit-scrollbar-thumb {
+    background: #580000; 
+
+
+    border-radius: 5px; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+  
+
+  

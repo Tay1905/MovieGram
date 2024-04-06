@@ -1,0 +1,187 @@
+<!-- Navigation -->
+<nav>
+    <div class="navigation">
+        <a href="#searchBar">
+            <h1>MOVIEGRAM</h1>
+        </a>
+        <div class="links">
+            <a href="#movies">Movies</a>
+            <a href="#TvShows">TvShows</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main content -->
+<section>
+    <!-- Searchbar -->
+    <div class="searchBar" id="searchBar">
+        <input type="text" id="search-input" placeholder="Search for a movie...">
+        <button (click)="searchMovies()">Search</button>
+    </div>
+
+    <!-- InfoContainer -->
+    <div class="infoContainer " id="infoContainer" *ngIf="showDetails && selectedShow">
+        <button (click)="closeInfo()" class="closeBtn">X</button>
+        <!-- Movie image -->
+        <div class='movieImg'>
+            <img [src]="getFullImageUrl(selectedShow.poster_path)">
+        </div>
+        <!-- Movie info -->
+        <div class="info">
+            <p *ngIf="selectedShow.title"><b>Title:</b> {{ selectedShow.title }}</p>
+            <p *ngIf="selectedShow.overview"><b>Overview:</b> {{ selectedShow.overview }}</p>
+            <p *ngIf="selectedShow.release_date"> <b>Release Date:</b> {{ selectedShow.release_date }}</p>
+            <p *ngIf="selectedShow.vote_average"><b>Vote Average:</b> {{ selectedShow.vote_average }}</p>
+            <p *ngIf="selectedShow.original_language"> <b>Original language:</b> {{ selectedShow.original_language }}</p>
+        </div>
+    </div>
+
+    <!-- Headline movies -->
+    <div class="headlineMovies" id="movies">
+        <h3>Movies</h3>
+    </div>
+
+    <!-- Movie rows -->
+    <div class="rows">
+        <h2>Popular movies</h2>
+        <div class="movies">
+            @for (movie of popularMovies; track movie.id) {
+            <div class="movie">
+                <img (click)="showInfo(movie)" [src]="getFullImageUrl(movie.poster_path)" alt="">
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Movie rows -->
+    <div class="rows">
+        <h2> Top rated movies</h2>
+        <div class="movies">
+            @for (movie of ratedMovies; track movie.id) {
+            <div class="movie">
+                <img (click)="showInfo(movie)" [src]="getFullImageUrl(movie.poster_path)" alt="">
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Trailer container -->
+    <div id="trailerContainer" class="trailerContainer">
+        <span>Check out the new DUNE 2 trailer</span>
+        <iframe [src]="markVideoUrlAsSafe(videoUrl)" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <!-- Movie rows -->
+    <div class="rows">
+        <h2>Trending movies</h2>
+        <div class="movies">
+            @for (movie of trendingMovies; track movie.id) {
+            <div class="movie">
+                <img (click)="showInfo(movie)" [src]="getFullImageUrl(movie.poster_path)" alt="">
+            </div>
+            }
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Movie rows -->
+    <div class="rows">
+        <h2>Upcoming movies</h2>
+
+        <div class="movies">
+            @for (movie of upcomingMovies; track movie.id) {
+            <div class="movie">
+                <img (click)="showInfo(movie)" [src]="getFullImageUrl(movie.poster_path)" alt="">
+            </div>
+            }
+        </div>
+    </div>
+
+
+
+    <!-- Image middle part -->
+    <div class="middlePart"></div>
+
+
+    <!-- Headline TvShows -->
+    <div class="headlineMovies">
+        <h3>Tv Shows</h3>
+    </div>
+
+    <!-- Movie rows -->
+    <div class="rows" id="TvShows">
+        <h2>Airing today</h2>
+        <div class="movies">
+            @for (show of airingShows; track show.id) {
+            <div class="movie">
+                <img (click)="showInfo(show)" [src]="getFullImageUrl(show.poster_path)" alt="">
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Movie rows -->
+    <div class="rows">
+        <h2>Top rated TV shows</h2>
+        <div class="movies">
+            @for (show of ratedShows; track show.id) {
+            <div class="movie">
+                <img (click)="showInfo(show)" [src]="getFullImageUrl(show.poster_path)" alt="">
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Movie rows -->
+    <div class="rows">
+        <h2>Popular TV shows</h2>
+        <div class="movies">
+            @for (show of popularShows; track show.id) {
+            <div class="movie">
+                <img (click)="showInfo(show)" [src]="getFullImageUrl(show.poster_path)" alt="">
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- User opinions -->
+    <div class="userOpinions">
+        <h1>User opinions</h1>
+
+        <!-- User main content -->
+        <div class="userContent">
+            
+            <!-- User content -->
+            <div class="user">
+                <div class="boxes" id="opinion1">
+                    @for (opinion of UserOpinions; track UserOpinions) {
+                    <div id="userOpinion">
+                        <img src="${{opinion.image}}" alt=""> <span> {{opinion.opinion}} </span>
+                    </div>
+                    }
+                </div>
+
+                <!-- User content 2 -->
+                <div class="boxes">
+                    @for (opinion of UserOpinions2; track UserOpinions) {
+                    <div id="userOpinion">
+                        <img src="${{opinion.image}}" alt=""> <span> {{opinion.opinion}} </span>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="inputContainer">
+            <input type="text" id="inputfield" name="opinion" placeholder="Tell us about your favorite show or movie..."
+                [(ngModel)]="newOpinion">
+            <button (click)="saveOpinion()">post</button>
+        </div>
+    </div>
+
+</section>
